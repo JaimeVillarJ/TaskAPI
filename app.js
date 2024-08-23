@@ -252,6 +252,9 @@ app.post('/api/palindrome', authenticateToken, (req, res, next) => {
     }
 
     try {
+        // Convertir el texto a minúsculas
+        const normalizedText = text.toLowerCase();
+
         // Función para verificar si una cadena es un palíndromo
         const isPalindrome = (str) => {
             const len = str.length;
@@ -277,7 +280,7 @@ app.post('/api/palindrome', authenticateToken, (req, res, next) => {
             return maxPalindrome;
         };
 
-        const largestPalindrome = findLargestPalindrome(text);
+        const largestPalindrome = findLargestPalindrome(normalizedText);
 
         logActivity('Búsqueda de palíndromo exitosa', `Texto: ${text}, Palíndromo: ${largestPalindrome}`);
         res.status(200).json({ largestPalindrome });
@@ -286,6 +289,7 @@ app.post('/api/palindrome', authenticateToken, (req, res, next) => {
         next(error);
     }
 });
+
 
 
 // Iniciar el servidor
